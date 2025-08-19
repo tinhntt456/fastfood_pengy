@@ -24,11 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Hash password
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $pdo->prepare('INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)');
-            if ($stmt->execute([$name, $email, $phone, $hashedPassword])) {
-                $success = 'Registration successful! You can log in.';
-            } else {
-                $error = 'Registration failed. Please try again.';
-            }
+      if ($stmt->execute([$name, $email, $phone, $hashedPassword])) {
+        header('Location: authentication-login.php');
+        exit;
+      } else {
+        $error = 'Registration failed. Please try again.';
+      }
         }
     }
 }

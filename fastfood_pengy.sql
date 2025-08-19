@@ -52,15 +52,15 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(11) ,
   `order_code` varchar(255) NOT NULL,
-  `note` text DEFAULT NULL,
-  `status` varchar(100) DEFAULT NULL,
-  `subtotal` decimal(10,2) DEFAULT NULL,
-  `tax_fee` decimal(10,2) DEFAULT NULL,
-  `total` decimal(10,2) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
+  `note` text ,
+  `status` varchar(100) ,
+  `subtotal` decimal(10,2) ,
+  `tax_fee` decimal(10,2) ,
+  `total` decimal(10,2) ,
+  `created_at` datetime ,
+  `updated_at` datetime ,
   `total_price` decimal(10,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -88,11 +88,11 @@ INSERT INTO `orders` (`id`, `user_id`, `order_code`, `note`, `status`, `subtotal
 
 CREATE TABLE `order_details` (
   `id` int(11) NOT NULL,
-  `order_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `subtotal` decimal(10,2) DEFAULT NULL
+  `order_id` int(11) ,
+  `product_id` int(11) ,
+  `price` decimal(10,2) ,
+  `quantity` int(11) ,
+  `subtotal` decimal(10,2) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -126,10 +126,10 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `price`, `quantity`
 
 CREATE TABLE `order_status_logs` (
   `id` int(11) NOT NULL,
-  `order_id` int(11) DEFAULT NULL,
-  `status` varchar(100) DEFAULT NULL,
-  `changed_at` datetime DEFAULT NULL,
-  `note` text DEFAULT NULL
+  `order_id` int(11) ,
+  `status` varchar(100) ,
+  `changed_at` datetime ,
+  `note` text 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -142,12 +142,12 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `descriptions` text DEFAULT NULL,
-  `thumbnail` varchar(255) DEFAULT NULL,
+  `descriptions` text ,
+  `thumbnail` varchar(255) ,
   `stock` int(11) DEFAULT 0,
-  `category_id` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
+  `category_id` int(11) ,
+  `created_at` datetime ,
+  `updated_at` datetime 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -190,7 +190,7 @@ INSERT INTO `products` (`id`, `name`, `price`, `descriptions`, `thumbnail`, `sto
 CREATE TABLE `product_images` (
   `id` int(11) NOT NULL,
   `image_url` varchar(255) NOT NULL,
-  `product_id` int(11) DEFAULT NULL
+  `product_id` int(11) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -232,11 +232,11 @@ INSERT INTO `product_images` (`id`, `image_url`, `product_id`) VALUES
 
 CREATE TABLE `reviews` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `rating` int(11) DEFAULT NULL CHECK (`rating` >= 1 and `rating` <= 5),
-  `comment` text DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL
+  `user_id` int(11) ,
+  `product_id` int(11) ,
+  `rating` int(11)  CHECK (`rating` >= 1 and `rating` <= 5),
+  `comment` text ,
+  `created_at` datetime 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -247,12 +247,12 @@ CREATE TABLE `reviews` (
 
 CREATE TABLE `shipping_addresses` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `recipient_name` varchar(255) DEFAULT NULL,
-  `phone` varchar(50) DEFAULT NULL,
-  `address` text DEFAULT NULL,
+  `user_id` int(11) ,
+  `recipient_name` varchar(255) ,
+  `phone` varchar(50) ,
+  `address` text ,
   `is_default` tinyint(1) DEFAULT 0,
-  `created_at` datetime DEFAULT NULL
+  `created_at` datetime 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -268,8 +268,8 @@ CREATE TABLE `users` (
   `phone` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL DEFAULT 'user',
-  `address` varchar(255) DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
+  `address` varchar(255) ,
+  `created_at` datetime 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

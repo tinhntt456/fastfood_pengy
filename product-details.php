@@ -1,4 +1,20 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) session_start();
+
+// Handle adding to cart via GET request
+if (isset($_GET['add_to_cart']) && isset($_GET['id']) && (int)$_GET['id'] > 0) {
+  $product_id = (int)$_GET['id'];
+  $quantity = 1;
+  if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
+  if (isset($_SESSION['cart'][$product_id])) {
+    $_SESSION['cart'][$product_id] += $quantity;
+  } else {
+    $_SESSION['cart'][$product_id] = $quantity;
+  }
+  $_SESSION['cart_success'] = 'Product added to cart successfully!';
+  header('Location: product-details.php?id=' . $product_id);
+  exit;
+}
 include 'header.php';
 require_once __DIR__ . '/config/database.php';
 
@@ -295,27 +311,10 @@ function get_image_path($img) {
 
 </div>
 <!--end page content-->
-
-
-<?php
-// Handle adding to cart via GET request
-if (isset($_GET['add_to_cart']) && $product_id > 0) {
-    $quantity = 1;
-    if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
-    if (isset($_SESSION['cart'][$product_id])) {
-        $_SESSION['cart'][$product_id] += $quantity;
-    } else {
-        $_SESSION['cart'][$product_id] = $quantity;
-    }
-    $_SESSION['cart_success'] = 'Product added to cart successfully!';
-    header('Location: product-details.php?id=' . $product_id);
-    exit;
-}
-?>
 <?php include 'footer.php'; ?>
 <?php if (!empty($_SESSION['cart_success'])): ?>
-      <script>
-        toastr.success('<?= $_SESSION['cart_success'] ?>');
-      </script>   
-      <?php unset($_SESSION['cart_success']); ?>
+  <script>
+    toastr.success('<?= $_SESSION['cart_success'] ?>');
+  </script>
+  <?php unset($_SESSION['cart_success']); ?>
 <?php endif; ?>

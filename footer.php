@@ -4,6 +4,9 @@
     <div class="row row-cols-1 row-cols-lg-4 g-4">
       <div class="col">
         <div class="footer-widget-6">
+            <div style="margin-bottom: 16px;">
+              <img src="assets/images/Logo.jpg" alt="Logo" style="width: 80px; height: auto; display: block;">
+            </div>
           <!-- Photo removed as requested -->
           <h5 class="mb-3 fw-bold">About Us</h5>
           <p class="mb-2">Serving up the ultimate fast-food experience with fresh ingredients, lightning-fast service, and irresistible flavors. From juicy burgers to crispy fries, we satisfy every craving, every time.</p>
