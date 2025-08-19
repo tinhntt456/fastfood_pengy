@@ -65,6 +65,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="card-body p-4">
               <h4 class="mb-0 fw-bold text-center">User Login</h4>
               <hr>
+              <?php if (!empty($_SESSION['register_success'])): ?>
+                <div class="alert alert-success"> <?= $_SESSION['register_success'] ?> </div>
+                <?php unset($_SESSION['register_success']); ?>
+              <?php endif; ?>
               <?php if ($error): ?>
                 <div class="alert alert-danger"> <?= $error ?> </div>
               <?php endif; ?>

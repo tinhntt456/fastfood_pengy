@@ -25,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $pdo->prepare('INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)');
       if ($stmt->execute([$name, $email, $phone, $hashedPassword])) {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        $_SESSION['register_success'] = 'Registration successful! You can log in.';
         header('Location: authentication-login.php');
         exit;
       } else {
